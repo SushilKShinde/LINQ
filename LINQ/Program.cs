@@ -11,48 +11,49 @@ namespace LINQ
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the linq concept");
-            List<int> dataSource = new List<int> { 100, 15, 74, 32, 21, 35, 14 };
 
-            var querySyntax = (from num in dataSource
-                               where num >= 30 && num <= 80
-                               orderby num
-                               select num).ToList();
-
-            var methodSyntax = dataSource.Where(num => num >= 30 && num <= 80).OrderBy(num => num).ToList();
-
-            Console.WriteLine("Output by Query Syntax");
-            foreach (var item in querySyntax)
+            var dataSource = new List<Employee>
             {
-                Console.WriteLine(item);
-            }
+                new Employee
+                {
+                    empId = 2,
+                    email = "sushil@gmail.com",
+                    name = "Sushil"
+                },
 
-            Console.WriteLine("\nOutput by Method Syntax");
-            foreach (var item in methodSyntax)
+                new Employee
+                {
+                    empId = 3,
+                    email = "Aman@gmail.com",
+                    name = "Aman"
+                },
+
+                new Employee
+                {
+                    empId = 1,
+                    email = "Chatur@hotmail.com",
+                    name = "Chatur"
+                },
+
+                new Employee
+                {
+                    empId = 4,
+                    email = "Bhagya@hotmail.com",
+                    name = "Bhagya"
+                }
+
+            };
+            
+
+            var querySyntax = (from emp in dataSource
+                              orderby emp.name
+                              select emp).ToList();
+
+            var methodSyntax = dataSource.Where(emp => emp.empId >= 3).OrderBy(emp => emp.name).ToList();
+
+            foreach(var emp in methodSyntax)
             {
-                Console.WriteLine(item);
-            }
-
-            List<string> stringDataSource = new List<string> { "Sushil", "Aman", "Budhha", "Chatur", "Deboline" };
-
-            var stringQuerySyntax = (from name in stringDataSource
-                                     where name.Length > 6
-                                     orderby name
-                                     select name).ToList();    // o/p: Deboline
-
-            var stringMethodSyntax = stringDataSource.Where(name => name.Length > 6).OrderBy(name => name).ToList(); // o/p: Deboline
-
-            Console.WriteLine("\nStringQuerySyntax OrderBy and Where");
-
-            foreach(var name in stringQuerySyntax)
-            {
-                Console.WriteLine(name);
-            }
-
-            Console.WriteLine("\nStringMethodSyntax OrderBy and where ");
-
-            foreach (var name in stringMethodSyntax)
-            {
-                Console.WriteLine(name);
+                Console.WriteLine(emp.name);
             }
         }
     }
