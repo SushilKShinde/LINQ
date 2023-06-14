@@ -12,49 +12,29 @@ namespace LINQ
         {
             Console.WriteLine("Welcome to the linq concept");
 
-            var dataSource = new List<Employee>
+            // Any method is used to check if at least one element of datasource satisfys the given condition
+            // returns Boolean value
+            // to check if data source contains any data or not
+
+            List<int> numbers = new List<int> { 2, 3, 4, 5, 6, 7, 8, 1 };
+
+            bool res = numbers.Any();  // true
+            Console.WriteLine(res);
+            numbers.Sort();
+            if(res)
             {
-                new Employee
-                {
-                    empId = 2,
-                    email = "sushil@gmail.com",
-                    name = "Sushil"
-                },
-
-                new Employee
-                {
-                    empId = 3,
-                    email = "Aman@gmail.com",
-                    name = "Aman"
-                },
-
-                new Employee
-                {
-                    empId = 1,
-                    email = "Chatur@hotmail.com",
-                    name = "Chatur"
-                },
-
-                new Employee
-                {
-                    empId = 4,
-                    email = "Bhagya@hotmail.com",
-                    name = "Bhagya"
-                }
-
-            };
-            
-
-            var querySyntax = (from emp in dataSource
-                              orderby emp.name
-                              select emp).ToList();
-
-            var methodSyntax = dataSource.Where(emp => emp.empId >= 3).OrderBy(emp => emp.name).ToList();
-
-            foreach(var emp in methodSyntax)
-            {
-                Console.WriteLine(emp.name);
+                foreach(int i in numbers)
+                    Console.WriteLine(i);
             }
+
+            var methodSyntax = numbers.Any(x => x > 8); 
+            Console.WriteLine(methodSyntax);  // false
+
+            var querySyntax = (from num in numbers
+                               select num).Any(num => num > 8);
+            Console.WriteLine(querySyntax);
+
         }
+    
     }
 }
